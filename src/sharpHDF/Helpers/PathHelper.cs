@@ -18,7 +18,7 @@ namespace sharpHDF.Library.Helpers
             }
 
             if (_path != null
-                && _path.FullPath!="/")
+                && _path.FullPath != "/")
             {
                 string fullPath = _path.FullPath;
 
@@ -29,7 +29,7 @@ namespace sharpHDF.Library.Helpers
 
                 return new Hdf5Path(fullPath + "/" + _childName);
             }
-            
+
             return new Hdf5Path(_childName);
         }
     }

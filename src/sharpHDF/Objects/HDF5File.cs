@@ -23,7 +23,7 @@ namespace sharpHDF.Library.Objects
         {
             if (!File.Exists(_filename))
             {
-                throw new Hdf5FileNotFoundException();
+                throw new FileNotFoundException();
             }
 
             Id = H5F.open(_filename, H5F.ACC_RDWR).ToId();
@@ -47,19 +47,19 @@ namespace sharpHDF.Library.Objects
             }
         }
 
-        public static Hdf5File Create(string _filename)
+        public static Hdf5File Create(string filename, bool @overwrite = true)
         {
-            if (File.Exists(_filename))
+            if (File.Exists(filename))
             {
                 throw new Hdf5FileExistsException();
             }
 
-            Hdf5Identifier fileId = H5F.create(_filename, H5F.ACC_EXCL).ToId();
+            var fileId = H5F.create(filename, @overwrite ? H5F.ACC_TRUNC : H5F.ACC_EXCL).ToId();
 
             if (fileId.Value > 0)
             {
                 H5F.close(fileId.Value);
-                return new Hdf5File(_filename);
+                return new Hdf5File(filename);
             }
 
             throw new Hdf5UnknownException();
@@ -71,13 +71,13 @@ namespace sharpHDF.Library.Objects
         public void Close()
         {
             H5F.close(Id.Value);
-            Id = 0.ToId();
+            Id = 0L.ToId();
         }
 
         /// <summary>
         /// List of attributes that are attached to this object
         /// </summary>
-        public Hdf5Attributes Attributes {get; private set; }
+        public Hdf5Attributes Attributes { get; private set; }
 
         /// <summary>
         /// List of the groups that are contained at the top level of the file
@@ -87,7 +87,7 @@ namespace sharpHDF.Library.Objects
         /// <summary>
         /// List of the datasets that are contained at the top level of the file
         /// </summary>
-        public Hdf5Datasets Datasets { get; internal set; } 
+        public Hdf5Datasets Datasets { get; internal set; }
 
         /// <summary>
         /// Disposes of object references in the file
@@ -97,7 +97,7 @@ namespace sharpHDF.Library.Objects
             if (Id.Value != 0)
             {
                 Close();
-            }            
+            }
         }
     }
 }

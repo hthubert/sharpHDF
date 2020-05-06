@@ -43,7 +43,7 @@ namespace sharpHDF.Library.Objects
         /// Information regarding the shape of the dataset
         /// </summary>
         public Hdf5Dataspace Dataspace { get; set; }
-        
+
         /// <summary>
         /// Retreives an array of the data that the dataset contains
         /// </summary>
@@ -98,8 +98,7 @@ namespace sharpHDF.Library.Objects
         /// </summary>
         public Hdf5Attributes Attributes
         {
-            get
-            {
+            get {
                 return m_Attributes;
             }
         }

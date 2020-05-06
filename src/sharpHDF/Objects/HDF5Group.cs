@@ -12,8 +12,8 @@ namespace sharpHDF.Library.Objects
     public class Hdf5Group : AbstractHdf5Object, IHasGroups, IHasAttributes, IHasDatasets, IHasName
     {
         internal Hdf5Group(
-            Hdf5Identifier _fileId, 
-            Hdf5Identifier _groupId, 
+            Hdf5Identifier _fileId,
+            Hdf5Identifier _groupId,
             string _path)
         {
             FileId = _fileId;

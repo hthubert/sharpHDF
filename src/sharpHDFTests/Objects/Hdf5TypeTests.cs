@@ -11,12 +11,12 @@ using sharpHDF.Library.Objects;
 namespace sharpHDF.Library.Tests.Objects
 {
     [TestFixture]
-    public class Hdf5TypeTests :BaseTest
+    public class Hdf5TypeTests : BaseTest
     {
         [OneTimeSetUp]
         public void Setup()
         {
-            DirectoryName = @"c:\temp\hdf5tests\typetests";
+            DirectoryName = @"d:\temp\hdf5tests\typetests";
 
             CleanDirectory();
         }

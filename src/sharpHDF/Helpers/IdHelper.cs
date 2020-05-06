@@ -11,12 +11,12 @@ namespace sharpHDF.Library.Helpers
     internal static class IdHelper
     {
 #if HDF5_VER1_10
-        public static Hdf5Identifier ToId(this Int64 _value)
+        public static Hdf5Identifier ToId(this long value)
 #else
-        public static Hdf5Identifier ToId(this Int32 _value)
+        public static Hdf5Identifier ToId(this Int32 value)
 #endif
         {
-            var id = new Hdf5Identifier(_value);
+            var id = new Hdf5Identifier(value);
             return id;
         }
     }

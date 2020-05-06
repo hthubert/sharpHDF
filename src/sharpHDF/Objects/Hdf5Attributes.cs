@@ -59,7 +59,7 @@ namespace sharpHDF.Library.Objects
             {
                 return AttributeHelper.CreateAttributeAddToList(ParentObject.Id, this, _name, _value);
             }
-            
+
             Hdf5Attribute attribute = null;
 
             //Otherwise open the object and then call the function.

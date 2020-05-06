@@ -18,7 +18,7 @@ namespace sharpHDF.Library.Tests.Objects
         [OneTimeSetUp]
         public void Setup()
         {
-            DirectoryName = @"c:\temp\hdf5tests\datasettests";
+            DirectoryName = @"d:\temp\hdf5tests\datasettests";
 
             CleanDirectory();
         }
@@ -31,7 +31,7 @@ namespace sharpHDF.Library.Tests.Objects
             Hdf5File file = Hdf5File.Create(filename);
 
             List<Hdf5DimensionProperty> properties = new List<Hdf5DimensionProperty>();
-            Hdf5DimensionProperty property = new Hdf5DimensionProperty {CurrentSize = 100 };
+            Hdf5DimensionProperty property = new Hdf5DimensionProperty { CurrentSize = 100 };
             properties.Add(property);
 
             Hdf5Dataset dataset = file.Datasets.Add("dataset1", Hdf5DataTypes.Int8, properties);
@@ -138,7 +138,7 @@ namespace sharpHDF.Library.Tests.Objects
             {
                 Assert.IsInstanceOf<ArgumentNullException>(ex);
             }
-            
+
             file.Close();
         }
 
@@ -158,7 +158,7 @@ namespace sharpHDF.Library.Tests.Objects
 
             try
             {
-                Int32[] value = {1, 2, 3};
+                Int32[] value = { 1, 2, 3 };
                 dataset.SetData(value);
                 Assert.Fail("Exception was expected");
             }
@@ -217,7 +217,7 @@ namespace sharpHDF.Library.Tests.Objects
             try
             {
                 //5x2 rather than 3x2
-                Int32[,] value = {{ 1, 2, 3, 4, 5 }, { 6, 7, 8, 9, 10 }};
+                Int32[,] value = { { 1, 2, 3, 4, 5 }, { 6, 7, 8, 9, 10 } };
                 dataset.SetData(value);
                 Assert.Fail("Exception was expected");
             }
@@ -308,7 +308,7 @@ namespace sharpHDF.Library.Tests.Objects
             try
             {
                 //1 dimensions sent, 2 expected
-                Int32[] value = {  1, 2, 3, 4, 5 } ;
+                Int32[] value = { 1, 2, 3, 4, 5 };
                 dataset.SetData(value);
                 Assert.Fail("Exception was expected");
             }
@@ -406,7 +406,7 @@ namespace sharpHDF.Library.Tests.Objects
             file.Close();
         }
 
- 
+
 
         [Test]
         public void SetInt64()

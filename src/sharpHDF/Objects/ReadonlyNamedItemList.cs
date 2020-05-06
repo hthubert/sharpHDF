@@ -9,10 +9,10 @@ using sharpHDF.Library.Interfaces;
 
 namespace sharpHDF.Library.Objects
 {
-    public class ReadonlyNamedItemList<T> : IEnumerable<T> where T:IHasName
+    public class ReadonlyNamedItemList<T> : IEnumerable<T> where T : IHasName
     {
         private readonly List<T> m_InternalList;
-        private readonly Dictionary<string, T> m_Dictionary; 
+        private readonly Dictionary<string, T> m_Dictionary;
 
         public ReadonlyNamedItemList()
         {
@@ -64,8 +64,7 @@ namespace sharpHDF.Library.Objects
 
         public T this[string _name]
         {
-            get
-            {
+            get {
                 if (m_Dictionary.ContainsKey(_name))
                 {
                     return m_Dictionary[_name];

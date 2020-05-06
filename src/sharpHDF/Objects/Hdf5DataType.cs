@@ -8,7 +8,7 @@ using sharpHDF.Library.Structs;
 
 namespace sharpHDF.Library.Objects
 {
-    public class Hdf5DataType 
+    public class Hdf5DataType
     {
         internal Hdf5Identifier Id { get; set; }
 

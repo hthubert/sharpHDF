@@ -11,12 +11,12 @@ namespace sharpHDF.Library.Structs
     {
 
 #if HDF5_VER1_10
-        public Hdf5Identifier(Int64 _value)
+        public Hdf5Identifier(long _value)
         {
             Value = _value;
         }
 
-        public Int64 Value;
+        public long Value;
 #else
         public Hdf5Identifier(Int32 _value)
         {
@@ -33,7 +33,7 @@ namespace sharpHDF.Library.Structs
 
         public override int GetHashCode()
         {
-            return Value;
+            return (int)Value;
         }
     }
 }

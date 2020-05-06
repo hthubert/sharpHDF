@@ -14,7 +14,7 @@ namespace sharpHDF.Library.Tests.Objects
         [OneTimeSetUp]
         public void Setup()
         {
-            DirectoryName = @"c:\temp\hdf5tests\grouptests";
+            DirectoryName = @"d:\temp\hdf5tests\grouptests";
 
             CleanDirectory();
         }
@@ -138,7 +138,7 @@ namespace sharpHDF.Library.Tests.Objects
             {
                 var group = file.Groups[i];
             }
-            
+
             file.Close();
         }
 

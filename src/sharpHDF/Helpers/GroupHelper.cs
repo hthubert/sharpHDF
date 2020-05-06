@@ -16,7 +16,7 @@ namespace sharpHDF.Library.Helpers
 {
     internal static class GroupHelper
     {
-        public static void PopulateChildrenObjects<T>(Hdf5Identifier _fileId, T _parentObject)  where T : AbstractHdf5Object
+        public static void PopulateChildrenObjects<T>(Hdf5Identifier _fileId, T _parentObject) where T : AbstractHdf5Object
         {
             ulong pos = 0;
 
@@ -28,15 +28,13 @@ namespace sharpHDF.Library.Helpers
             {
                 ArrayList al = new ArrayList();
                 GCHandle hnd = GCHandle.Alloc(al);
-                IntPtr op_data = (IntPtr) hnd;
+                IntPtr op_data = (IntPtr)hnd;
 
                 H5L.iterate(_parentObject.Id.Value, H5.index_t.NAME, H5.iter_order_t.NATIVE, ref pos,
-                    delegate(int _objectId, IntPtr _namePtr, ref H5L.info_t _info, IntPtr _data)
+                    delegate (long _objectId, IntPtr _namePtr, ref H5L.info_t _info, IntPtr _data)
                     {
                         string objectName = Marshal.PtrToStringAnsi(_namePtr);
-
                         groupNames.Add(objectName);
-
                         return 0;
                     }, op_data);
 
@@ -109,9 +107,9 @@ namespace sharpHDF.Library.Helpers
         }
 
         public static Hdf5Group CreateGroupAddToList(
-            ReadonlyNamedItemList<Hdf5Group> _groups, 
+            ReadonlyNamedItemList<Hdf5Group> _groups,
             Hdf5Identifier _fileId,
-            Hdf5Path _parentPath, 
+            Hdf5Path _parentPath,
             string _name)
         {
             Hdf5Group group = CreateGroup(_fileId, _parentPath, _name);
@@ -126,19 +124,14 @@ namespace sharpHDF.Library.Helpers
         public static Hdf5Group CreateGroup(Hdf5Identifier _fileId, Hdf5Path _parentPath, string _name)
         {
             Hdf5Path path = _parentPath.Append(_name);
-
-            int id = H5G.create(_fileId.Value, path.FullPath);
-
+            var id = H5G.create(_fileId.Value, path.FullPath);
             if (id > 0)
             {
                 Hdf5Group group = new Hdf5Group(_fileId, id.ToId(), path.FullPath);
                 H5G.close(id);
-
                 FileHelper.FlushToFile(_fileId);
-
                 return group;
             }
-
             return null;
         }
 

@@ -15,7 +15,7 @@ namespace sharpHDF.Library.Tests.Objects
         [OneTimeSetUp]
         public void Setup()
         {
-            DirectoryName = @"c:\temp\hdf5tests\readonlylist";
+            DirectoryName = @"d:\temp\hdf5tests\readonlylist";
 
             CleanDirectory();
         }

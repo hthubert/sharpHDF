@@ -16,7 +16,7 @@ namespace sharpHDF.Library.Tests.Objects
         [OneTimeSetUp]
         public void Setup()
         {
-            DirectoryName = @"c:\temp\hdf5tests\pathtests";
+            DirectoryName = @"d:\temp\hdf5tests\pathtests";
 
             CleanDirectory();
         }
@@ -35,7 +35,7 @@ namespace sharpHDF.Library.Tests.Objects
             catch (Exception ex)
             {
                 Assert.IsInstanceOf<ArgumentNullException>(ex);
-            }            
+            }
         }
 
         [Test]

@@ -9,15 +9,18 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>sharpHDF.Library</RootNamespace>
     <AssemblyName>sharpHDF</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">.\</SolutionDir>
     <RestorePackages>true</RestorePackages>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
     <DebugSymbols>true</DebugSymbols>
     <OutputPath>bin\x64\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;HDF5_VER1_10</DefineConstants>
     <DebugType>full</DebugType>
     <PlatformTarget>x64</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
@@ -25,7 +28,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
     <OutputPath>bin\x64\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
+    <DefineConstants>TRACE;HDF5_VER1_10</DefineConstants>
     <Optimize>true</Optimize>
     <DebugType>pdbonly</DebugType>
     <PlatformTarget>x64</PlatformTarget>
@@ -33,9 +36,8 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="HDF.PInvoke, Version=1.8.16.20170, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\HDF.PInvoke.1.8.16.11\lib\Net45\HDF.PInvoke.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="HDF.PInvoke, Version=1.10.5.2, Culture=neutral, PublicKeyToken=18793c1fcffe58a3, processorArchitecture=MSIL">
+      <HintPath>packages\HDF.PInvoke.1.10.5.2\lib\HDF.PInvoke.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -52,7 +54,6 @@
     <Compile Include="Exceptions\Hdf5ArraySizeMismatchException.cs" />
     <Compile Include="Exceptions\Hdf5AttributeAlreadyExistException.cs" />
     <Compile Include="Exceptions\Hdf5FileExistsException.cs" />
-    <Compile Include="Exceptions\Hdf5FileNotFoundException.cs" />
     <Compile Include="Exceptions\Hdf5TypeMismatchException.cs" />
     <Compile Include="Exceptions\Hdf5UnknownDataType.cs" />
     <Compile Include="Exceptions\Hdf5UnknownException.cs" />
@@ -89,14 +90,10 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>
-if not exist "$(TargetDir)bin32" md "$(TargetDir)bin32"
-xcopy /s /y "$(SolutionDir)packages\HDF.PInvoke.1.8.16.11\lib\native\bin32\*.*" "$(TargetDir)bin32"
-if not exist "$(TargetDir)bin64" md "$(TargetDir)bin64"
-xcopy /s /y "$(SolutionDir)packages\HDF.PInvoke.1.8.16.11\lib\native\bin64\*.*" "$(TargetDir)bin64"</PostBuildEvent>
+    </PostBuildEvent>
   </PropertyGroup>
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
@@ -104,7 +101,9 @@ xcopy /s /y "$(SolutionDir)packages\HDF.PInvoke.1.8.16.11\lib\native\bin64\*.*" 
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+    <Error Condition="!Exists('packages\HDF.PInvoke.1.10.5.2\build\HDF.PInvoke.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\HDF.PInvoke.1.10.5.2\build\HDF.PInvoke.targets'))" />
   </Target>
+  <Import Project="packages\HDF.PInvoke.1.10.5.2\build\HDF.PInvoke.targets" Condition="Exists('packages\HDF.PInvoke.1.10.5.2\build\HDF.PInvoke.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

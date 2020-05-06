@@ -20,7 +20,7 @@ namespace sharpHDF.Library.Objects
         /// Current number of elements in the dataset.
         /// </summary>
         public ulong CurrentSize { get; set; }
-        
+
         /// <summary>
         /// Maximum size of a dataset.  Can only be set at creation of the dataset.
         /// </summary>

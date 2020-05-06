@@ -18,7 +18,7 @@ namespace sharpHDF.Library.Tests.Objects
         [OneTimeSetUp]
         public void Setup()
         {
-            DirectoryName = @"c:\temp\hdf5tests\attributetests";
+            DirectoryName = @"d:\temp\hdf5tests\attributetests";
 
             CleanDirectory();
         }
@@ -318,7 +318,7 @@ namespace sharpHDF.Library.Tests.Objects
             Hdf5Group group = file.Groups.Add("group1");
 
             List<Hdf5DimensionProperty> dimensionProps = new List<Hdf5DimensionProperty>();
-            Hdf5DimensionProperty prop = new Hdf5DimensionProperty {CurrentSize = 1};
+            Hdf5DimensionProperty prop = new Hdf5DimensionProperty { CurrentSize = 1 };
             dimensionProps.Add(prop);
 
             Hdf5Dataset dataset = group.Datasets.Add("dataset1", Hdf5DataTypes.Int32, dimensionProps);

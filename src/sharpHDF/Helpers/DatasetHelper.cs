@@ -30,7 +30,7 @@ namespace sharpHDF.Library.Helpers
 
             Hdf5Dataset dataset = new Hdf5Dataset(_fileId, _datasetId, _fullPath)
             {
-                
+
                 Dataspace = dataspace,
                 DataType = datatype
             };
@@ -107,7 +107,7 @@ namespace sharpHDF.Library.Helpers
 
             if (_dataset.DataType.Type == Hdf5DataTypes.Single)
             {
-                return Read1DArray<Single>(_datasetIdentifer, _dataset); 
+                return Read1DArray<Single>(_datasetIdentifer, _dataset);
             }
 
             if (_dataset.DataType.Type == Hdf5DataTypes.Double)
@@ -310,9 +310,9 @@ namespace sharpHDF.Library.Helpers
             List<Hdf5DimensionProperty> _properties)
         {
             Hdf5Dataset dataset = CreateDataset(
-                _fileId, 
-                _parentPath, 
-                _name, 
+                _fileId,
+                _parentPath,
+                _name,
                 _datatype,
                 _numberOfDimensions,
                 _properties);
@@ -326,11 +326,11 @@ namespace sharpHDF.Library.Helpers
         }
 
         public static Hdf5Dataset CreateDataset(
-            Hdf5Identifier _fileId, 
-            Hdf5Path _parentPath, 
-            string _name, 
-            Hdf5DataTypes _datatype, 
-            int _numberOfDimensions, 
+            Hdf5Identifier _fileId,
+            Hdf5Path _parentPath,
+            string _name,
+            Hdf5DataTypes _datatype,
+            int _numberOfDimensions,
             List<Hdf5DimensionProperty> _properties)
         {
             Hdf5Path path = _parentPath.Append(_name);
@@ -356,7 +356,7 @@ namespace sharpHDF.Library.Helpers
             }
 
             Hdf5Identifier dataspaceId = H5S.create_simple(_numberOfDimensions, dimensionSize, maxSize).ToId();
-            
+
             //TODO handle string datasets
             Hdf5Identifier typeId = H5T.copy(TypeHelper.GetNativeType(_datatype).Value).ToId();
             var status = H5T.set_order(typeId.Value, H5T.order_t.LE);

@@ -10,7 +10,7 @@ namespace sharpHDF.Library.Tests.Objects
     public abstract class BaseTest
     {
         protected string DirectoryName { get; set; }
-        
+
         public void CleanDirectory()
         {
             if (!Directory.Exists(DirectoryName))
